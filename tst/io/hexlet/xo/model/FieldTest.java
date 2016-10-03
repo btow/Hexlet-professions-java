@@ -1,5 +1,6 @@
 package io.hexlet.xo.model;
 
+import io.hexlet.xo.model.exception.AlreadyOccupiedException;
 import io.hexlet.xo.model.exception.InvalidPointException;
 import org.junit.Test;
 
@@ -7,21 +8,17 @@ import java.awt.*;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by btow on 03.10.2016.
- */
 public class FieldTest {
     @Test
     public void testGetSize() throws Exception {
 
         final int inputValue = 3;
-        final int expectedValue = inputValue;
 
         final Field field = new Field(inputValue);
 
         final int actualValue = field.getSize();
 
-        assertEquals(expectedValue, actualValue);
+        assertEquals(inputValue, actualValue);
 
     }
 
@@ -30,9 +27,7 @@ public class FieldTest {
 
         final int inputValue_FieldSize = 3;
         final Point inputValue_Point = new Point(0, 0);
-        final Point expectedValue_Point = inputValue_Point;
         final Figure inputValue_Figure = Figure.O;
-        final Figure expectedValue_Figure = inputValue_Figure;
 
         final Field field = new Field(inputValue_FieldSize);
 
@@ -40,7 +35,25 @@ public class FieldTest {
 
         final Figure actualValue_Figure = field.getFigure(inputValue_Point);
 
-        assertEquals(expectedValue_Figure, actualValue_Figure);
+        assertEquals(inputValue_Figure, actualValue_Figure);
+
+    }
+
+    @Test
+    public void testSetFigureWenAlreadyOccupied() throws Exception {
+
+        final int inputValue_FieldSize = 3;
+        final Point inputValue_Point = new Point(0, 0);
+        final Figure inputValue_Figure = Figure.O;
+
+        final Field field = new Field(inputValue_FieldSize);
+
+        field.setFigure(inputValue_Point, inputValue_Figure);
+
+        try {
+            field.setFigure(inputValue_Point, inputValue_Figure);
+            fail();
+        } catch (final AlreadyOccupiedException e) {}
 
     }
 
@@ -49,7 +62,6 @@ public class FieldTest {
 
         final int inputValue_FieldSize = 3;
         final Point inputValue_Point = new Point(0, 0);
-        final Point expectedValue_Point = inputValue_Point;
 
         final Field field = new Field(inputValue_FieldSize);
 
@@ -64,7 +76,6 @@ public class FieldTest {
 
         final int inputValue_FieldSize = 3;
         final Point inputValue_Point = new Point(-1, 0);
-        final Point expectedValue_Point = inputValue_Point;
 
         final Field field = new Field(inputValue_FieldSize);
 
@@ -80,7 +91,6 @@ public class FieldTest {
 
         final int inputValue_FieldSize = 3;
         final Point inputValue_Point = new Point(0, -1);
-        final Point expectedValue_Point = inputValue_Point;
 
         final Field field = new Field(inputValue_FieldSize);
 
@@ -98,7 +108,6 @@ public class FieldTest {
         final Field field = new Field(inputValue_FieldSize);
 
         final Point inputValue_Point = new Point(field.getSize() + 1, 0);
-        final Point expectedValue_Point = inputValue_Point;
 
         try {
             field.getFigure(inputValue_Point);
@@ -114,7 +123,6 @@ public class FieldTest {
         final Field field = new Field(inputValue_FieldSize);
 
         final Point inputValue_Point = new Point(0, field.getSize() + 1);
-        final Point expectedValue_Point = inputValue_Point;
 
         try {
             field.getFigure(inputValue_Point);
