@@ -2,6 +2,7 @@ package io.hexlet.xo.model;
 
 import io.hexlet.xo.model.exception.AlreadyOccupiedException;
 import io.hexlet.xo.model.exception.InvalidPointException;
+import io.hexlet.xo.model.exception.InvalidSizeException;
 import org.junit.Test;
 
 import java.awt.*;
@@ -9,6 +10,19 @@ import java.awt.*;
 import static org.junit.Assert.*;
 
 public class FieldTest {
+
+    @Test
+    public void testFieldWenSIzeLessMin() throws Exception {
+
+        final int inputValue_FieldSize = 0;
+
+        try {
+            Field field = new Field(inputValue_FieldSize);
+            fail();
+        } catch (final InvalidSizeException e) {}
+
+    }
+
     @Test
     public void testGetSize() throws Exception {
 
