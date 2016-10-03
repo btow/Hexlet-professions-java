@@ -1,8 +1,5 @@
 package io.hexlet.xo.model;
 
-/**
- * Created by btow on 03.10.2016.
- */
 public class Player {
 
     private final String name;
