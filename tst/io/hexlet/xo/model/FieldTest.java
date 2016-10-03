@@ -18,6 +18,9 @@ public class FieldTest {
 
         final int actualValue = field.getSize();
 
+        /*метод принудительного падения приложения сработает
+         если ожидаемое значение не эквивалентно актуальному
+        */
         assertEquals(inputValue, actualValue);
 
     }
@@ -52,6 +55,9 @@ public class FieldTest {
 
         try {
             field.setFigure(inputValue_Point, inputValue_Figure);
+            /*метод принудительного падения приложения сработает
+            если не произошло выбрасывания исключения
+             */
             fail();
         } catch (final AlreadyOccupiedException e) {}
 
@@ -67,6 +73,9 @@ public class FieldTest {
 
         final Figure actualValue_Figure = field.getFigure(inputValue_Point);
 
+        /*метод принудительного падения приложения сработает
+         если актуальное значение эквивалентно null
+        */
         assertNull(actualValue_Figure);
 
     }
